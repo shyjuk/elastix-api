@@ -352,6 +352,7 @@ class Net_AsteriskManager
         $command = "Action: Originate\r\nChannel: $channel\r\n"
             ."Context: $context\r\nExten: $extension\r\nPriority: $priority\r\n"
             ."Callerid: $cid\r\nTimeout: $timeout\r\n";
+//	    ."Async: yes\r\n";
 
         if (count($variables) > 0) {
             $chunked_vars = array();
@@ -366,7 +367,7 @@ class Net_AsteriskManager
             $command .= "ActionID: $action_id\r\n";
         }
         $this->_sendCommand($command."\r\n");
-        return true;
+        return $command;
     }
 
     /**

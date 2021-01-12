@@ -4,7 +4,7 @@ include_once dirname(__FILE__)."/lib/json/phpJson.class.php";
 include_once dirname(__FILE__)."/lib/ast/Extension.php";
 class Elastix{
 	public function __construct(){
-		$fh = fopen('/etc/elastix.conf','r');
+		$fh = fopen('/etc/issabel.conf','r');
 		$data = array();
 		while ($line = fgets($fh)) {
 			if(strlen($line) > 1){

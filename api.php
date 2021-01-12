@@ -6,9 +6,10 @@ class APICommand
 {
 	public function __construct($rkey, $cmd)
 	{
-		$this->key = 'YOUR_SECRETKEY_50_RANDOM_CHARS';
+		$this->key = 'kJBJzUqZ2WShyju9vrFTEzXN7NNfDv9XyzENAn7teWDsZCcYHj';
 		$this->rkey = $rkey;
 		$this->cmd = $cmd;
+
 	}
 	public function execute(){
 		if (strcmp($this->key, $this->rkey) == 0) {
@@ -21,6 +22,10 @@ class APICommand
 					$ast = new Asterisk();
 					$ast->get_sip_peers();
 					break;
+                                case "makecall":
+                                        $ast = new Asterisk();
+                                        $ast->make_call();
+                                        break;
 				case "sipextensions":
 					$ast = new Asterisk();
 					$ast->get_sip_extensions();

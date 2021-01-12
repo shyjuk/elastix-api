@@ -11,8 +11,6 @@ class Asterisk{
 		$auth = $this->get_auth();
 		$this->username = $auth["username"];
 		$this->password = $auth["password"];
-		$this->agent_no = isset($_POST['agent_no']) ? $_POST['agent_no'] : null;
-		$this->custmr_no = isset($_POST['custmr_no']) ? $_POST['custmr_no'] : null;
 	}
 	private function get_auth(){
 		$data = parse_ini("/etc/asterisk/manager.conf");
@@ -98,31 +96,6 @@ class Asterisk{
 		header('Content-Type: text/html');
 		print_r($data);
 	}
-        public function make_call(){
-
-		try {
-		
-		$agent_no  = $this->agent_no;
-		$extension  = $this->custmr_no;
-		//print($agent_no."---".  $extension);
-		$channel =  "Local/".$agent_no."@from-internal";
-		$context = "from-internal";
-		$cid = $extension; 
-		
-                $this->ast->connect();
-                $this->ast->login($this->username, $this->password);
-                $data = $this->ast->originateCall($extension,$channel,$context,$cid,$priority = 1,$timeout = 45000,$variables = null,$action_id = null);
-		$this->get_active_call();
-                //header('Content-Type: text/html');
-                //print_r($data);
-		//print("Success !");
-		}
-		catch (Exception $e) {
-                //        echo $e->getMessage();
-		          echo "Error";
-                }
-        }
-
 	public function get_system_resources(){
 		/*
 			11:14:07 up  2:43,  5 users,  load average: 0.14, 0.31, 0.38
@@ -217,6 +190,5 @@ class Asterisk{
 		header('Content-Type: application/json');
 		echo json_encode($mainarr);
 	}
-
 }
 ?>
